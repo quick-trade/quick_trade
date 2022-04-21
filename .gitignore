@@ -12,4 +12,4 @@ quick_trade.egg-info
 *.dat
 *.py[cod]
 *.csv
-!examples/dataframes/BNBUSDT1d.csv
+quick_trade/tuner/avoid_overfitting/walkforward_multipair.py
