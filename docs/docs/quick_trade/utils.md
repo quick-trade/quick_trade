@@ -130,7 +130,7 @@ Function for calculating [compound interest](https://investmentu.com/simple-inte
 
 ## get_coef_sec
 
-Function for converting timeframe to profit ratio and sleep time for [`realtime_trading`](https://vladkochetov007.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=realtime_trading)
+Function for converting timeframe to profit ratio and sleep time for [`realtime_trading`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=realtime_trading)
 
 | param  | type | description |
 | :---: | :---: | :---: |

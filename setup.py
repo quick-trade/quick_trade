@@ -18,10 +18,10 @@ setup(
     long_description=long_desc,
     long_description_content_type="text/markdown",
     project_urls={
-        'Documentation': 'https://vladkochetov007.github.io/quick_trade/#/',
-        'Source': 'https://github.com/VladKochetov007/quick_trade',
+        'Documentation': 'https://quick-trade.github.io/quick_trade/#/',
+        'Source': 'https://github.com/quick-trade/quick_trade',
         'Twitter': 'https://twitter.com/quick_trade_tw',
-        'Bug Tracker': 'https://github.com/VladKochetov007/quick_trade/issues'
+        'Bug Tracker': 'https://github.com/quick-trade/quick_trade/issues'
     },
     install_requires=[
         'numpy==1.22.3',
@@ -32,7 +32,7 @@ setup(
         'ccxt==1.80.6',
         'scikit-learn',
     ],
-    download_url=f'https://github.com/VladKochetov007/quick_trade/archive/{__version__}.tar.gz',
+    download_url=f'https://github.com/quick-trade/quick_trade/archive/{__version__}.tar.gz',
     keywords=[
         'technical-analysis',
         'python3',

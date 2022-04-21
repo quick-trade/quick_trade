@@ -71,8 +71,8 @@ trader.sl_tp_adder(add_stop_loss=50)  # The stop loss moved 50 pips away from th
 This method is needed to process strategies with the ability to use several trades at once.
 
 ?> The method translates predictions that look like
-[converted](https://vladkochetov007.github.io/quick_trade/#/docs/quick_trade/utils?id=convert)
-data into [unconverted](https://vladkochetov007.github.io/quick_trade/#/docs/quick_trade/utils?id=anti_convert)
+[converted](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/utils?id=convert)
+data into [unconverted](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/utils?id=anti_convert)
 predictions and leverages.
 
 ```python
@@ -98,7 +98,7 @@ class MultiTrader(Trader):
         self.setcredit_leverages()
 ```
 
-!> Using [`setcredit_leverages`](https://vladkochetov007.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=setcredit_leverages)
+!> Using [`setcredit_leverages`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=setcredit_leverages)
 after [`multi_trades`](#multi_trades) is not advisable!
 
 ### get_heikin_ashi
@@ -169,7 +169,7 @@ trader.connect_graph(graph)
 trader.backtest(deposit=1000)
 ```
 
-![image](https://github.com/VladKochetov007/quick_trade/blob/master/img/plot.png?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/master/img/plot.png?raw=true)
 
 ### multi_backtest
 
@@ -232,7 +232,7 @@ calmar ratio: -8.002808500501935
 max drawdown: 12.493479751140047%
 ```
 
-![image](https://github.com/VladKochetov007/quick_trade/blob/master/img/multi_backtest.png?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/master/img/multi_backtest.png?raw=true)
 
 ### connect_graph
 
@@ -386,8 +386,8 @@ If the value has crossed the border with mid` - exit
 | returns | `utils.PREDICT_TYPE_LIST` | returns |
 
 example:
-![image](https://github.com/VladKochetov007/quick_trade/blob/master/img/rsi_strat_example.jpg?raw=true)
-![image](https://github.com/VladKochetov007/quick_trade/blob/master/img/rsi_2.jpg?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/master/img/rsi_strat_example.jpg?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/master/img/rsi_2.jpg?raw=true)
 
 ### strategy_parabolic_SAR
 
@@ -412,7 +412,7 @@ parabolic SAR strategy
 
 example:
 
-![image](https://github.com/VladKochetov007/quick_trade/blob/master/img/macd_diff_example.jpg?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/master/img/macd_diff_example.jpg?raw=true)
 
 ### strategy_supertrend
 
@@ -421,11 +421,11 @@ supertrend strategy. S/L - ST indicator
 | param  | type | description |
 | :---: | :---: | :---: |
 | plot | bool | plotting of SAR indicator |
-| multiplier | float, int | multiplier parameterf for [`utils.SuperTrendIndicator`](https://vladkochetov007.github.io/quick_trade/#/docs/quick_trade/utils?id=supertrendindicator) |
-| length | int | length parameter for [`utils.SuperTrendIndicator`](https://vladkochetov007.github.io/quick_trade/#/docs/quick_trade/utils?id=supertrendindicator) |
+| multiplier | float, int | multiplier parameterf for [`utils.SuperTrendIndicator`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/utils?id=supertrendindicator) |
+| length | int | length parameter for [`utils.SuperTrendIndicator`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/utils?id=supertrendindicator) |
 | returns | `utils.PREDICT_TYPE_LIST` | returns |
 
-![image](https://github.com/VladKochetov007/quick_trade/blob/master/img/supertrend.png?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/master/img/supertrend.png?raw=true)
 
 ### strategy_bollinger
 

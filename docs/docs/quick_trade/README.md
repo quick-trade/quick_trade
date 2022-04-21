@@ -15,7 +15,7 @@ To create a strategy, you will need to generate values for:
 If your strategy does not provide for the use of anything from this list, quick_trade provides methods for setting default values (as if the trader and tester would not use them).
 
 If your strategy does not generate stop loss or take profit, there is the
-[`Trader.set_open_stop_and_take`](https://vladkochetov007.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=set_open_stop_and_take)
+[`Trader.set_open_stop_and_take`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=set_open_stop_and_take)
 method. It automatically generates trade entry prices and, if necessary, stop-losses and take-profits.
 
 If you need to generate stop-loss and take-profit:
@@ -37,7 +37,7 @@ If you want to set take-profit or stop-loss, you can specify the `take_profit` a
 ?> tip: pips (aka point) = 1/10_000 of price
 
 If you want to enter a trade not for the entire deposit, but for a part or more (leverage), you can use the
-[`setcredit_leverages`](https://vladkochetov007.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=setcredit_leverages)
+[`setcredit_leverages`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=setcredit_leverages)
 method. It places the same `self.credit_leverages` for all candles.
 
 ```python
@@ -106,9 +106,9 @@ class MyTrader(qtr.Trader):
 
 There are two methods for testing in quick_trade:
 
-- [`backtest`](https://vladkochetov007.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=backtest) - A method for testing a strategy on a single dataframe. This method will show you a graph of the dataframe,
+- [`backtest`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=backtest) - A method for testing a strategy on a single dataframe. This method will show you a graph of the dataframe,
   deposit and its changes
-- [`multi_backtest`](https://vladkochetov007.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=multi_backtest) - A method for testing a strategy on multiple dataframes. This method will show you a graph of the
+- [`multi_backtest`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=multi_backtest) - A method for testing a strategy on multiple dataframes. This method will show you a graph of the
   deposit and its changes, but without any dataframe, because there are a lot of them
 
 Code:
@@ -151,10 +151,10 @@ calmar ratio: -4.920697866228742
 max drawdown: 20.322320675199602%
 ```
 
-![image](https://raw.githubusercontent.com/VladKochetov007/quick_trade/master/img/simple_backtest_example.png)
+![image](https://raw.githubusercontent.com/quick-trade/quick_trade/master/img/simple_backtest_example.png)
 
-To use [`multi_backtest`](https://vladkochetov007.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=multi_backtest), you do not need to apply the strategy before the test, you do not even need to set the `df`
-and `ticker` when [initializing the trader](https://vladkochetov007.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=trader).
+To use [`multi_backtest`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=multi_backtest), you do not need to apply the strategy before the test, you do not even need to set the `df`
+and `ticker` when [initializing the trader](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=trader).
 
 ```python
 client = TradingClient(ftx())
@@ -196,10 +196,10 @@ calmar ratio: -9.081044783748151
 max drawdown: 10.250399516075348%
 ```
 
-![image](https://github.com/VladKochetov007/quick_trade/blob/master/img/multi_backtest_example.png?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/master/img/multi_backtest_example.png?raw=true)
 
 ?> If your strategy does not provide for exit conditions or provides for the ability to enter several trades at once, you can
-use [`multi_trades`](https://vladkochetov007.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=multi_trades). This method processes the strategist's prediction data and generates leverage.
+use [`multi_trades`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=multi_trades). This method processes the strategist's prediction data and generates leverage.
 
 ## What if I combine the two strategies?
 
