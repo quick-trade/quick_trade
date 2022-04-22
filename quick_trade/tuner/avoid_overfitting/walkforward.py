@@ -22,6 +22,7 @@ class InSample:
         self._tuner.sort_tunes(sort_by=sort_by)
         return bests_to_config(self._tuner.get_best())
 
+
 class OutOfSample:
     def __init__(self, trader: Trader):
         self._trader = trader
@@ -169,6 +170,30 @@ class WalkForward:
                 bar.update(1)
         self.total_equity = list(np.cumprod(self.total_equity))
         self._update_info()
+
+    def actual_config(self,
+                     ticker: str = 'BTC/USDT',
+                     timeframe: str = '1h',
+                     config=None,
+                     tuner_instance=QuickTradeTuner,
+                     trader_instance=Trader,
+                     sort_by: str = 'percentage year profit',
+                     commission=0,
+                     bet=np.inf,
+                     use_tqdm: bool = True):
+        self.__load_df(ticker, timeframe)
+        self.__prepare_df()
+        client = _static_data_historical_client(
+            self._client.__class__,
+            self._df[-self._insample_chunks*self.chunk_length:]
+        )
+        tuner = tuner_instance(client=client,
+                               tickers=[self.ticker],
+                               intervals=[self.timeframe],
+                               strategies_kwargs=config,
+                               multi_backtest=False)
+        last_IS = InSample(tuner=tuner)
+        return last_IS.get_settings(sort_by=sort_by)
 
     def equity(self):
         return self.total_equity
