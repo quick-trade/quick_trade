@@ -140,3 +140,64 @@ class PriceChannel(Indicator):
 
     def lower_line(self):
         return self.low
+
+
+class ATRMultiplier(Indicator):
+    _multiplier: np.ndarray
+
+    def __init__(self,
+                 high: pd.Series,
+                 low: pd.Series,
+                 close: pd.Series,
+                 window: int = 100,
+                 multiplier_window: int = 100):
+        self._high = high
+        self._low = low
+        self._close = close
+        self._window = window
+        self._multiplier_window = multiplier_window
+        self._run()
+
+    def _run(self):
+        ATR = ta.volatility.average_true_range(high=self._high,
+                                               low=self._low,
+                                               close=self._close,
+                                               window=self._window)
+        atr_roll = ATR.rolling(self._multiplier_window)
+        atr_min = atr_roll.min()
+        atr_max = atr_roll.max()
+        self._multiplier = 1 + (ATR - atr_min) / (atr_max - atr_min)
+        self._multiplier = np.nan_to_num(self._multiplier, nan=1)
+
+    def multiplier_by_average_true_range(self):
+        return self._multiplier
+
+class AdaptivePriceChannel(PriceChannel):
+    def __init__(self,
+                 high: pd.Series,
+                 low: pd.Series,
+                 close: pd.Series,
+                 support_period: int = 20,
+                 resistance_period: int = 20,
+                 channel_part: float = 1.0,
+                 atr_window: int = 14,
+                 multiplier_window: int = 30):
+        atr_multiplier = ATRMultiplier(high=high,
+                                       low=low,
+                                       close=close,
+                                       window=atr_window,
+                                       multiplier_window=multiplier_window)
+        self._multipliers = atr_multiplier.multiplier_by_average_true_range()
+        super().__init__(high=high,
+                         low=low,
+                         support_period=support_period,
+                         resistance_period=resistance_period,
+                         channel_part=channel_part)
+
+    def _run_lev(self, func, period, prices):
+        channel = []
+        for i, coef in enumerate(self._multipliers):
+            curr_period = round(period * coef)
+            start = max(0, i-curr_period)
+            channel.append(func(prices[start:i+1]))
+        return channel

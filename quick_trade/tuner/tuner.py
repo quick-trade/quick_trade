@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from itertools import product
 from typing import Any
 from typing import Dict
@@ -24,9 +26,9 @@ class QuickTradeTuner(object):
     def __init__(self,
                  client: TradingClient,
                  tickers: Iterable[str] = None,
-                 intervals: Iterable[str] = None,
-                 limits: Iterable = None,
-                 strategies_kwargs: Dict[str, List[Dict[str, Any]]] = None,
+                 intervals: Iterable[str] | None = None,
+                 limits: Iterable | None = None,
+                 strategies_kwargs: Dict[str, List[Dict[str, Any]]] | None = None,
                  multi_backtest: bool = True):
         """
 

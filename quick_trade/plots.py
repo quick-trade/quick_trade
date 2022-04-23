@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Dict
 from typing import Iterable
 from typing import List
@@ -51,7 +53,8 @@ def make_trader_figure(height: Union[int, float] = 900,
 
 
 class BaseGraph(object):
-    def __init__(self, figure=None):
+    def __init__(self,
+                 figure: Figure | None = None):
         if figure is None:
             figure = make_figure(rows=1, cols=1)
         self._figure = figure
@@ -63,17 +66,17 @@ class BaseGraph(object):
 class BasePlotlyGraph(BaseGraph):
     def plot_line(self,
                   line: Iterable = None,
-                  index: Iterable = None,
+                  index: Iterable | None = None,
                   width: float = 1.0,
                   opacity: float = 1.0,
-                  color: str = None,
-                  name: str = None,
+                  color: str | None = None,
+                  name: str | None = None,
                   _row: int = 1,
                   _col: int = 1,
                   mode: str = 'lines',
-                  marker: str = None,
-                  fill: str = None,
-                  fill_color: str = None):
+                  marker: str | None = None,
+                  fill: str | None = None,
+                  fill_color: str | None = None):
         self._figure.add_trace(
             row=_row,
             col=_col,
@@ -115,8 +118,8 @@ class BasePlotlyGraph(BaseGraph):
     def plot_area(self,
                   fast: Iterable = None,
                   slow: Iterable = None,
-                  name_fast: str = None,
-                  name_slow: str = None):
+                  name_fast: str | None = None,
+                  name_slow: str | None = None):
         self.plot_line(line=fast,
                        color=utils.SENKOU_SPAN_A_COLOR,
                        _row=self.data_row,
@@ -149,7 +152,7 @@ class TraderGraph(BasePlotlyGraph):
     returns_row: int = 3
     returns_col: int = 1
 
-    def __init__(self, figure=None):
+    def __init__(self, figure: Figure | None = None):
         if figure is None:
             figure = make_figure(rows=3, cols=1)
         self._figure = figure
@@ -286,7 +289,7 @@ class ValidationAnalysisGraph(BasePlotlyGraph):
     test_row: int = 1
     test_col: int = 1
 
-    def __init__(self, figure=None):
+    def __init__(self, figure: Figure | None = None):
         if figure is None:
             figure = make_figure(rows=1, cols=1)
         self._figure = figure

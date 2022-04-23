@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import numpy as np
 import pandas as pd
 from tqdm.auto import tqdm
@@ -105,7 +107,7 @@ class WalkForward:
                  insample_chunks: int = 3,
                  outofsample_chunks: int = 1,
                  testing_indent_chunks: int = 1,
-                 chunk_length=None):
+                 chunk_length: int | None = None):
         assert not (total_chunks - insample_chunks) % outofsample_chunks or chunk_length
 
         self._total_chunks = total_chunks

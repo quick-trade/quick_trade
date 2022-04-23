@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from warnings import warn
 
 import numpy as np
@@ -14,7 +16,7 @@ from ..tuner import QuickTradeTuner
 
 
 class DataFrameHandler:
-    def __init__(self, client=None, timeframe: str = '1d'):
+    def __init__(self, client: TradingClient | None = None, timeframe: str = '1d'):
         if client is None:
             client = TradingClient(ccxt.binance())
         self._client = client
@@ -98,7 +100,7 @@ class VolatilityScaler:
         return self._mean_scaled_volatility
 
 class Clusterizer:
-    def __init__(self, afprop_kwargs=None):
+    def __init__(self, afprop_kwargs: Dict[str, Any] | None = None):
         clusterer_kwargs = afprop_kwargs
         if afprop_kwargs is None:
             clusterer_kwargs = dict(preference=-0.012, random_state=0)
@@ -151,7 +153,10 @@ class Tuner:
                 )
         self.n_groups = len(self._tuners)
 
-    def __run_task(self, task, kwargs=None, kwargs_dynamic=None):
+    def __run_task(self,
+                   task,
+                   kwargs: Dict | None = None,
+                   kwargs_dynamic: List[Dict] = None):
         if kwargs_dynamic is None:
             kwargs_dynamic = [{}] * self.n_groups
         if kwargs is None:
@@ -201,7 +206,7 @@ class Tuner:
                         kwargs=dict(sort_by=sort_by,
                                     drop_na=drop_na))
 
-    def load_tunes(self, path: str = 'volatility_tuner/returns-{}.json', data=None):
+    def load_tunes(self, path: str = 'volatility_tuner/returns-{}.json', data: Dict | None = None):
         self._update_path(path)
         if data is None:
             self._buffer.load_from_json(self.__global_tuner_path)
@@ -235,12 +240,12 @@ class Tuner:
         return self.bests
 
 def split_tickers_volatility(tickers: List[str],
-                             client=None,
+                             client: TradingClient | None = None,
                              timeframe: str = '1d',
                              span_start: int = 20,
                              span_end: int = 30,
                              span_step: int = 2,
-                             afprop_kwargs=None):
+                             afprop_kwargs: Dict | None = None):
     df_handler = DataFrameHandler(client=client)
     volatility_handler = VolatilityHandler(data_handler=df_handler,
                                            span_start=span_start,

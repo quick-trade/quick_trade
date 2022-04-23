@@ -12,6 +12,7 @@
 #   telegram bot
 #   https://smart-lab.ru/company/www-marketstat-ru/blog/502764.php
 #   SOLID, DRY
+from __future__ import annotations
 
 from copy import deepcopy
 from datetime import datetime
@@ -499,7 +500,7 @@ class Trader(object):
                        plot: bool = True,
                        print_out: bool = True,
                        show: bool = True,
-                       _dataframes=None) -> pd.DataFrame:
+                       _dataframes: Dict[str, pd.DataFrame] | None = None) -> pd.DataFrame:
         for el in test_config.keys():
             assert isinstance(el, str), 'tickers must be of type <Iterable[str]>'
             assert fullmatch(utils.TICKER_PATTERN, el), f'all tickers must match the pattern <{utils.TICKER_PATTERN}>'
@@ -589,7 +590,7 @@ class Trader(object):
         return self.backtest_out
 
     def connect_graph(self,
-                      graph: TraderGraph = None):
+                      graph: TraderGraph | None = None):
         """
         connect TraderGraph
         """
@@ -1900,6 +1901,49 @@ class ExampleStrategies(Trader):
                                      support_period=support_period,
                                      resistance_period=resistance_period,
                                      channel_part=channel_part)
+        flag = utils.EXIT
+        for price, low, high in zip(self.df['Close'],
+                                    PC.lower_line(),
+                                    PC.higher_line()):
+            if price > high:
+                flag = utils.SELL
+            elif price < low:
+                flag = utils.BUY
+            self.returns.append(flag)
+        if plot:
+            self.fig.plot_line(PC.lower_line(),
+                               width=utils.PRICE_CHANNEL_LOWER_WIDTH,
+                               color=utils.PRICE_CHANNEL_LOWER_COLOR,
+                               name=utils.PRICE_CHANNEL_LOWER_NAME,
+                               opacity=utils.PRICE_CHANNEL_LOWER_ALPHA,
+                               _row=self.fig.data_row,
+                               _col=self.fig.data_col)
+            self.fig.plot_line(PC.higher_line(),
+                               width=utils.PRICE_CHANNEL_UPPER_WIDTH,
+                               color=utils.PRICE_CHANNEL_UPPER_COLOR,
+                               name=utils.PRICE_CHANNEL_UPPER_NAME,
+                               opacity=utils.PRICE_CHANNEL_UPPER_ALPHA,
+                               _row=self.fig.data_row,
+                               _col=self.fig.data_col)
+
+    @strategy
+    def strategy_adaptive_price_channel(
+            self,
+            support_period: int = 20,
+            resistance_period: int = 20,
+            channel_part: float = 0.8,
+            atr_window: int = 14,
+            multiplier_window: int = 30,
+            plot: bool = True
+    ):
+        PC = indicators.AdaptivePriceChannel(high=self.df['High'],
+                                             low=self.df['Low'],
+                                             close=self.df['Close'],
+                                             support_period=support_period,
+                                             resistance_period=resistance_period,
+                                             channel_part=channel_part,
+                                             atr_window=atr_window,
+                                             multiplier_window=multiplier_window)
         flag = utils.EXIT
         for price, low, high in zip(self.df['Close'],
                                     PC.lower_line(),
