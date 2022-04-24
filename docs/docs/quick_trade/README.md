@@ -37,7 +37,7 @@ If you want to set take-profit or stop-loss, you can specify the `take_profit` a
 ?> tip: pips (aka point) = 1/10_000 of price
 
 If you want to enter a trade not for the entire deposit, but for a part or more (leverage), you can use the
-[`setcredit_leverages`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=setcredit_leverages)
+[`set_credit_leverages`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=set_credit_leverages)
 method. It places the same `self.credit_leverages` for all candles.
 
 ```python
@@ -97,7 +97,7 @@ class MyTrader(qtr.Trader):
                 self.stop_losses.append(price + stop_indicator)  # same
 
         self.set_open_stop_and_take(set_stop=False)
-        self.setcredit_leverages(1)  # trading without any leverage but for all deposit
+        self.set_credit_leverages(1)  # trading without any leverage but for all deposit
         return self.returns  # It's not obligatory
 
 ```

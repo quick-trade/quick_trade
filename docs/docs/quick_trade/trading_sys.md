@@ -95,10 +95,10 @@ class MultiTrader(Trader):
                 self.returns.append(np.nan)  # <------
         self.multi_trades()  # <----------------------
         self.set_open_stop_and_take()
-        self.setcredit_leverages()
+        self.set_credit_leverages()
 ```
 
-!> Using [`setcredit_leverages`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=setcredit_leverages)
+!> Using [`set_credit_leverages`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=set_credit_leverages)
 after [`multi_trades`](#multi_trades) is not advisable!
 
 ### get_heikin_ashi
