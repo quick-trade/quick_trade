@@ -1,5 +1,5 @@
 # quick_trade
-
+[![stand-with-Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://vshymanskyy.github.io/StandWithUkraine)
 [![Downloads](https://static.pepy.tech/personalized-badge/quick-trade?period=total&units=none&left_color=grey&right_color=brightgreen&left_text=PyPi%20downloads)](https://pepy.tech/project/quick-trade)
 [![Downloads](https://static.pepy.tech/personalized-badge/quick-trade?period=month&units=none&left_color=grey&right_color=brightgreen&left_text=PyPi%20downloads%20(month))](https://pepy.tech/project/quick-trade)
 
