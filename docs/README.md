@@ -1,4 +1,4 @@
-![image](https://github.com/quick-trade/quick_trade/blob/master/img/logo_with_slogan.PNG?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/main/img/logo_with_slogan.PNG?raw=true)
 
 !> All orders amounts must be quoted in quote currency.
 

@@ -151,7 +151,7 @@ calmar ratio: -4.920697866228742
 max drawdown: 20.322320675199602%
 ```
 
-![image](https://raw.githubusercontent.com/quick-trade/quick_trade/master/img/simple_backtest_example.png)
+![image](https://raw.githubusercontent.com/quick-trade/quick_trade/main/img/simple_backtest_example.png)
 
 To use [`multi_backtest`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=multi_backtest), you do not need to apply the strategy before the test, you do not even need to set the `df`
 and `ticker` when [initializing the trader](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=trader).
@@ -196,7 +196,7 @@ calmar ratio: -9.081044783748151
 max drawdown: 10.250399516075348%
 ```
 
-![image](https://github.com/quick-trade/quick_trade/blob/master/img/multi_backtest_example.png?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/main/img/multi_backtest_example.png?raw=true)
 
 ?> If your strategy does not provide for exit conditions or provides for the ability to enter several trades at once, you can
 use [`multi_trades`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/trading_sys?id=multi_trades). This method processes the strategist's prediction data and generates leverage.

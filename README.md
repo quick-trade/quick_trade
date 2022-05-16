@@ -3,7 +3,7 @@
 [![Downloads](https://static.pepy.tech/personalized-badge/quick-trade?period=total&units=none&left_color=grey&right_color=brightgreen&left_text=PyPi%20downloads)](https://pepy.tech/project/quick-trade)
 [![Downloads](https://static.pepy.tech/personalized-badge/quick-trade?period=month&units=none&left_color=grey&right_color=brightgreen&left_text=PyPi%20downloads%20(month))](https://pepy.tech/project/quick-trade)
 
-![image](https://github.com/quick-trade/quick_trade/blob/master/img/logo_with_slogan.PNG?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/main/img/logo_with_slogan.PNG?raw=true)
 
 
 ```
@@ -194,7 +194,7 @@ trader.backtest(deposit=1000, commission=0.075, bet=inf)  # backtest on one pair
 
 ## Output plotly chart:
 
-![image](https://raw.githubusercontent.com/quick-trade/quick_trade/master/img/plot.png)
+![image](https://raw.githubusercontent.com/quick-trade/quick_trade/main/img/plot.png)
 
 ## Output print
 
@@ -265,7 +265,7 @@ trader.realtime_trading(
 
 ```
 
-![image](https://github.com/quick-trade/quick_trade/blob/master/img/realtime_example.png?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/main/img/realtime_example.png?raw=true)
 
 ## Additional Resources
 

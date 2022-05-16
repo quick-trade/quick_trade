@@ -169,7 +169,7 @@ trader.connect_graph(graph)
 trader.backtest(deposit=1000)
 ```
 
-![image](https://github.com/quick-trade/quick_trade/blob/master/img/plot.png?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/main/img/plot.png?raw=true)
 
 ### multi_backtest
 
@@ -232,7 +232,7 @@ calmar ratio: -8.002808500501935
 max drawdown: 12.493479751140047%
 ```
 
-![image](https://github.com/quick-trade/quick_trade/blob/master/img/multi_backtest.png?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/main/img/multi_backtest.png?raw=true)
 
 ### connect_graph
 
@@ -386,8 +386,8 @@ If the value has crossed the border with mid` - exit
 | returns | `utils.PREDICT_TYPE_LIST` | returns |
 
 example:
-![image](https://github.com/quick-trade/quick_trade/blob/master/img/rsi_strat_example.jpg?raw=true)
-![image](https://github.com/quick-trade/quick_trade/blob/master/img/rsi_2.jpg?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/main/img/rsi_strat_example.jpg?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/main/img/rsi_2.jpg?raw=true)
 
 ### strategy_parabolic_SAR
 
@@ -412,7 +412,7 @@ parabolic SAR strategy
 
 example:
 
-![image](https://github.com/quick-trade/quick_trade/blob/master/img/macd_diff_example.jpg?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/main/img/macd_diff_example.jpg?raw=true)
 
 ### strategy_supertrend
 
@@ -425,7 +425,7 @@ supertrend strategy. S/L - ST indicator
 | length | int | length parameter for [`utils.SuperTrendIndicator`](https://quick-trade.github.io/quick_trade/#/docs/quick_trade/utils?id=supertrendindicator) |
 | returns | `utils.PREDICT_TYPE_LIST` | returns |
 
-![image](https://github.com/quick-trade/quick_trade/blob/master/img/supertrend.png?raw=true)
+![image](https://github.com/quick-trade/quick_trade/blob/main/img/supertrend.png?raw=true)
 
 ### strategy_bollinger
 
