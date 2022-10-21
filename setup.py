@@ -26,7 +26,7 @@ setup(
     install_requires=[
         'numpy==1.23.2',
         'plotly==5.10.0',
-        'pandas==1.4.4',
+        'pandas==1.5.1',
         'ta==0.10.2',
         'tqdm==4.64.1',
         'ccxt==2.0.55',
