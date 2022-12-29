@@ -29,7 +29,7 @@ setup(
         'pandas==1.5.2',
         'ta==0.10.2',
         'tqdm==4.64.1',
-        'ccxt==2.2.20',
+        'ccxt==2.4.71',
         'scikit-learn',
     ],
     download_url=f'https://github.com/quick-trade/quick_trade/archive/{__version__}.tar.gz',
