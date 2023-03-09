@@ -9,9 +9,8 @@
 #   add meta-data in tuner's returns
 #   add "tradingview backtest"
 #   multi-timeframe backtest
-#   telegram bot
-#   https://smart-lab.ru/company/www-marketstat-ru/blog/502764.php
 #   SOLID, DRY
+#   replace 0, -1, 1 with TradeSide
 from __future__ import annotations
 
 from copy import deepcopy
@@ -32,7 +31,7 @@ from . import indicators
 from . import utils
 from .brokers import TradingClient
 from .plots import TraderGraph
-from . import strategy
+from .utils import strategy
 
 
 class Trader(object):
@@ -282,7 +281,7 @@ class Trader(object):
         """
         testing the strategy.
         :param deposit: start deposit.
-        :param bet: fixed bet to quick_trade. np.inf = all moneys.
+        :param bet: fixed bet to backtest. np.inf = all deposit.
         :param commission: percentage commission (0 -- 100).
         :param plot: plotting.
         :param print_out: printing.
@@ -308,7 +307,6 @@ class Trader(object):
         take_profit: float
         converted_element: utils.CONVERTED_TYPE
         diff: float
-        lin_calc_df: pd.DataFrame
         high: float
         low: float
         credit_lev: Union[float, int]
@@ -321,7 +319,6 @@ class Trader(object):
         self.profits = 0
         self.losses = 0
         moneys_open_bet: Union[float, int] = deposit
-        money_start: Union[float, int] = deposit
         prev_sig = utils.EXIT
 
         ignore_breakout: bool = False
@@ -355,7 +352,7 @@ class Trader(object):
                                          data_high[1:],
                                          data_low[1:])):
 
-            if not np.isnan(converted_element):
+            if converted_element is not np.nan:
                 # count the number of profitable and unprofitable trades.
                 if prev_sig != utils.EXIT:
                     self.trades += 1
@@ -365,17 +362,11 @@ class Trader(object):
                         self.losses += 1
 
                 # calculating commission
-                if prev_sig != utils.EXIT:
-                    commission_reuse = 2
-                else:
-                    commission_reuse = 1
-                bet = start_bet
-                if bet > deposit:
-                    bet = deposit
-                for i in range(commission_reuse):
-                    deposit -= bet * (commission / 100) * credit_lev
-                    if bet > deposit:
-                        bet = deposit
+                bet, deposit = utils.apply_commission(deposit=deposit,
+                                                      pct_commission=commission,
+                                                      prev_trade=prev_sig,
+                                                      bet=start_bet,
+                                                      leverage=credit_lev)
 
                 # reset service variables
                 open_price = data_column[e]
@@ -394,7 +385,6 @@ class Trader(object):
                 stop_loss = self.stop_losses[e - 1]
                 take_profit = self.take_profits[e - 1]
                 # be careful with e=0
-                # haha))) no)
                 now_not_breakout = min(stop_loss, take_profit) < low <= high < max(stop_loss, take_profit)
 
                 normal = ignore_breakout or (now_not_breakout and next_not_breakout)
@@ -1007,7 +997,7 @@ class Trader(object):
         converted: utils.CONVERTED_TYPE
         ts: Dict[str, float]
         for e, (sig, close, converted) in enumerate(zip(self.returns, closes, self._converted)):
-            if not np.isnan(converted):
+            if converted is not np.nan:
                 self._open_price = close
                 if sig != utils.EXIT:
                     if set_take or set_stop:
@@ -1065,7 +1055,7 @@ class Trader(object):
         take_profits_before = self.take_profits
         for e, (sl, tp, p, sig, conv) in enumerate(zip(stop_losses_before, take_profits_before, self.df['Close'], self.returns, self._converted)):
             if sig == utils.SELL:
-                if not np.isnan(conv):
+                if conv is not np.nan:
                     correct_sl = p * (1 + sl_correction / 10_000)
                     correct_tp = p * (1 - tp_correction / 10_000)
                     correct_sl_use = False
@@ -1081,7 +1071,7 @@ class Trader(object):
                 else:
                     self.stop_losses[e] = correct_sl
             elif sig == utils.BUY:
-                if not np.isnan(conv):
+                if conv is not np.nan:
                     correct_sl = p * (1 - sl_correction / 10_000)
                     correct_tp = p * (1 + tp_correction / 10_000)
                     correct_sl_use = False

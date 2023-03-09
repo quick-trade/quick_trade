@@ -8,7 +8,7 @@
 
 ```
 Dependencies:
- ├──ta by Darío López Padial (Bukosabino   https://github.com/bukosabino/ta)
+ ├──ta (Bukosabino   https://github.com/bukosabino/ta (by Darío López Padial))
  ├──plotly (https://github.com/plotly/plotly.py)
  ├──pandas (https://github.com/pandas-dev/pandas)
  ├──numpy (https://github.com/numpy/numpy)
@@ -26,7 +26,7 @@ The [Quadratic Funding](https://vitalik.ca/general/2019/12/07/quadratic.html) fo
 
 **[Support quick_trade through Gitcoin](https://gitcoin.co/grants/3876/quick_trade)**.
 
-We will support community by opening boutnies from your grants.
+We will support community by opening bounties from your grants.
 
 [![gitcoin](https://gitcoin.co/funding/embed?repo=https://github.com/VladKochetov007/quick_trade&badge=1)](https://gitcoin.co/grants/3876/quick_trade)
 
@@ -51,12 +51,10 @@ $ cd ..
 ## Customize your strategy!
 
 ```python
-import quick_trade.trading_sys as qtr
-from quick_trade import brokers
 from quick_trade.plots import TraderGraph, make_trader_figure
-import yfinance as yf
 import ccxt
-from quick_trade import strategy
+from quick_trade import strategy, TradingClient, Trader
+from quick_trade.utils import TradeSide
 
 
 class MyTrader(qtr.Trader):
@@ -64,16 +62,19 @@ class MyTrader(qtr.Trader):
     def strategy_sell_and_hold(self):
         ret = []
         for i in self.df['Close'].values:
-            ret.append(qtr.utils.SELL)
+            ret.append(TradeSide.SELL)
         self.returns = ret
-        self.set_credit_leverages(1.0)
-        self.set_open_stop_and_take()
+        self.set_credit_leverages(2)  # if you want to use a leverage
+        self.set_open_stop_and_take(stop)
+        # or... set a stop loss with only one line of code
         return ret
 
 
-a = MyTrader('MSFT/USD', df=yf.download('MSFT', start='2019-01-01'))
+client = TradingClient(ccxt.binance())
+df = client.get_data_historical("BTC/USDT")
+trader = MyTrader("BTC/USDT", df=df)
 a.connect_graph(TraderGraph(make_trader_figure()))
-a.set_client(brokers.TradingClient(ccxt.ftx()))
+a.set_client(client)
 a.strategy_sell_and_hold()
 a.backtest()
 ```
@@ -81,34 +82,31 @@ a.backtest()
 ## Find the best strategy!
 
 ```python
-import quick_trade.trading_sys as qtr
+import quick_trade as qtr
 import ccxt
 from quick_trade.tuner import *
-from quick_trade.brokers import TradingClient
+from quick_trade import TradingClient
 
 
-class Test(qtr.ExampleStrategies):  # examples of strategies
+class Test(qtr.ExampleStrategies):
     @strategy
     def strategy_supertrend1(self, plot: bool = False, *st_args, **st_kwargs):
         self.strategy_supertrend(plot=plot, *st_args, **st_kwargs)
-        self.set_credit_leverages()
-        self.convert_signal()
+        self.convert_signal()  # only long trades
         return self.returns
-    
+
     @strategy
     def macd(self, histogram=False, **kwargs):
         if not histogram:
             self.strategy_macd(**kwargs)
         else:
             self.strategy_macd_histogram_diff(**kwargs)
-        self.set_credit_leverages()
         self.convert_signal()
         return self.returns
 
     @strategy
     def psar(self, **kwargs):
         self.strategy_parabolic_SAR(plot=False, **kwargs)
-        self.set_credit_leverages()
         self.convert_signal()
         return self.returns
 

@@ -1,3 +1,4 @@
+from enum import Enum
 import threading
 from functools import wraps
 from time import sleep
@@ -22,21 +23,60 @@ from numpy import ndarray
 from numpy import polyfit
 from pandas import Series
 from collections import defaultdict
+from ._code_inspect import format_arguments
+from functools import wraps
+from numpy import inf
 
-PREDICT_TYPE: type = int
+
+def strategy(strat):
+    @wraps(strat)
+    def wrapped(self, *args, **kwargs):
+        self.returns = []
+        self._converted = []
+        self.deposit_history = []
+        self.stop_losses = []
+        self.take_profits = []
+        self.open_lot_prices = []
+        registered = format_arguments(func=strat, args=args, kwargs=kwargs)
+        self._registered_strategy = registered
+
+        strategy_output = strat(self, *args, **kwargs)
+        self.returns_update()
+        if not len(self.stop_losses):
+            self.set_open_stop_and_take(set_take=False)
+        if not len(self.take_profits):
+            self.set_open_stop_and_take(set_stop=False)
+        if not len(self.credit_leverages):
+            self.set_credit_leverages()
+        self.correct_sl_tp(sl_correction=inf,
+                           tp_correction=inf)
+
+        self._registered_strategy = registered
+        return strategy_output
+    return wrapped
+
+
+class TradeSide(Enum):
+    BUY = 1
+    SELL = -1
+    EXIT = 0
+
+PREDICT_TYPE: type = TradeSide
+
 PREDICT_TYPE_LIST: type = List[PREDICT_TYPE]
 CONVERTED_TYPE: type = Union[PREDICT_TYPE, float]
 CONVERTED_TYPE_LIST: type = List[CONVERTED_TYPE]
 
-BUY: PREDICT_TYPE = 1
-SELL: PREDICT_TYPE = -1
-EXIT: PREDICT_TYPE = 0
+
+SELL = TradeSide.SELL
+BUY = TradeSide.BUY
+EXIT = TradeSide.EXIT
 
 TEXT_COLOR: str = 'white'
 
 TIME_TITLE: str = 'T I M E'
 
-DEPOSIT_TITLE: str = 'M O N E Y S'
+DEPOSIT_TITLE: str = 'E Q U I T Y'
 DEPOSIT_NAME: str = 'deposit (start: {0})'  # .format(Trader.deposit_history[0])
 DEPOSIT_COLOR: str = 'white'
 DEPOSIT_WIDTH: float = 2.0
@@ -54,7 +94,7 @@ DATA_UP_COLOR = 'green'
 DATA_DOWN_COLOR = 'red'
 DATA_ALPHA: float = 1.0
 
-AVERAGE_GROWTH_NAME: str = 'average growth'
+AVERAGE_GROWTH_NAME: str = 'regression'
 AVERAGE_GROWTH_COLOR: str = '#F1A5FB'
 AVERAGE_GROWTH_WIDTH: float = 1.0
 AVERAGE_GROWTH_ALPHA: float = 1.0
@@ -524,3 +564,21 @@ def strategy_characteristics(equity, timeframe, profit_trades=0, trades=0):
         'net_returns': net_returns,
         'average_growth': average_growth
     }
+
+
+def apply_commission(deposit: float,
+                     pct_commission: float,
+                     prev_trade: TradeSide,
+                     bet: float,
+                     leverage: float) -> tuple[float, float]:
+    if prev_trade != TradeSide.EXIT:
+        commission_reuse = 2
+    else:
+        commission_reuse = 1
+    if bet > deposit:
+        bet = deposit
+    for _ in range(commission_reuse):
+        deposit -= bet * (pct_commission / 100) * leverage
+        if bet > deposit:
+            bet = deposit
+    return bet, deposit
