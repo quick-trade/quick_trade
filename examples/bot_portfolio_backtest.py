@@ -41,6 +41,7 @@ config = {
     ],
     'ETH/USDT': [
         {'DP2': {}},
+        {'BB': {"window": 80, "dev":1.96}},
     ],
     'SOL/USDT': [
         {'DP2': dict(sl=1000)},

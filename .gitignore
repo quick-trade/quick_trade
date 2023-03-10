@@ -13,3 +13,4 @@ quick_trade.egg-info
 *.py[cod]
 *.csv
 quick_trade/tuner/avoid_overfitting/walkforward_multipair.py
+.idea
