@@ -237,7 +237,7 @@ calmar ratio: {}
 max drawdown: {}%
 profit/deviation ratio: {}"""  # .format(Trader.losses, Trader.trades, ...)
 
-__version__: str = "7.9.4"
+__version__: str = "7.9.6"
 __author__: str = 'Vlad Kochetov'
 __credits__: List[str] = [
     "Hemerson Tacon -- Stack overflow",

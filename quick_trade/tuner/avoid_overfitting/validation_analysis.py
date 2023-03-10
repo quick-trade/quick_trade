@@ -69,7 +69,7 @@ class ValidationTuner:
                  intervals: Iterable[str],
                  limits: Iterable,
                  strategies_kwargs: Dict[str, List[Dict[str, Any]]] = None,
-                 multi_backtest: bool = True,
+                 multi_backtest: bool = False,
                  validation_split: float = 0.3,
                  tuner_instance=QuickTradeTuner):
         class _Tuner(tuner_instance):

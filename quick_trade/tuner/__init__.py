@@ -1,4 +1,4 @@
-from tuner import *
+from .tuner import *
 import re
 from ast import literal_eval
 
