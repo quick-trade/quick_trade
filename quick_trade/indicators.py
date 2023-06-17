@@ -72,7 +72,7 @@ class SuperTrendIndicator(Indicator):
                 if dir_[i] == SELL and upperband.iloc[i] > upperband.iloc[i - 1]:
                     upperband.iloc[i] = upperband.iloc[i - 1]
 
-            if dir_[i] > 0:
+            if dir_[i] == BUY:
                 trend[i] = long[i] = lowerband.iloc[i]
             else:
                 trend[i] = short[i] = upperband.iloc[i]

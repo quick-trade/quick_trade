@@ -16,9 +16,7 @@ class BinanceTradingClient(Client, TradingClient):
                 df = pd.read_csv(file)
         except:
             ticker = ticker.replace('/', '')
-            start_date = datetime.datetime.strptime('5 Dec 2022', start_type)
-            start_date = datetime.datetime.strptime('5 Aug 2000', start_type)
-            start_date = datetime.datetime.strptime('5 Dec 2022', start_type)
+            start_date = datetime.datetime.strptime('5 Dec 2000', start_type)
 
             today = datetime.datetime.now()
             frames = self.get_historical_klines(ticker,
