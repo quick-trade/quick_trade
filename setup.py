@@ -28,7 +28,7 @@ setup(
         'plotly==5.15.0',
         'pandas==2.0.2',
         'ta==0.10.2',
-        'ccxt==3.1.41',
+        'ccxt==4.0.32',
         'tqdm==4.65.0',
         'scikit-learn',
     ],
