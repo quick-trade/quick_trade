@@ -20,16 +20,6 @@ Dependencies:
 * **Twitter:** [@quick_trade_tw](https://twitter.com/quick_trade_tw)
 * **Discord**: [quick_trade](https://discord.gg/SkRg9mzuB5)
 
-# Gitcoin Grant
-
-The [Quadratic Funding](https://vitalik.ca/general/2019/12/07/quadratic.html) formula makes your one dollar grant much more socially valuable.
-
-**[Support quick_trade through Gitcoin](https://gitcoin.co/grants/3876/quick_trade)**.
-
-We will support community by opening bounties from your grants.
-
-[![gitcoin](https://gitcoin.co/funding/embed?repo=https://github.com/VladKochetov007/quick_trade&badge=1)](https://gitcoin.co/grants/3876/quick_trade)
-
 ## Installation:
 
 Quick install:
