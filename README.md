@@ -63,10 +63,10 @@ class MyTrader(qtr.Trader):
 client = TradingClient(ccxt.binance())
 df = client.get_data_historical("BTC/USDT")
 trader = MyTrader("BTC/USDT", df=df)
-a.connect_graph(TraderGraph(make_trader_figure()))
-a.set_client(client)
-a.strategy_sell_and_hold()
-a.backtest()
+trader.connect_graph(TraderGraph(make_trader_figure()))
+trader.set_client(client)
+trader.strategy_sell_and_hold()
+trader.backtest()
 ```
 
 ## Find the best strategy!
