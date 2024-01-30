@@ -1,6 +1,6 @@
 from binance.client import Client  # pip3 install python-binance
-from quick_trade.quick_trade import utils
-from quick_trade.quick_trade.brokers import TradingClient
+from quick_trade import utils
+from quick_trade.brokers import TradingClient
 import pandas as pd
 import datetime
 

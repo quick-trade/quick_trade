@@ -6,7 +6,7 @@ from distutils.core import setup
 with open('README.md') as file:
     long_desc = file.read()
 
-__version__ = "7.9.7"
+__version__ = "7.9.8"
 
 setup(
     name='quick_trade',
@@ -45,12 +45,7 @@ setup(
     license='cc-by-sa-4.0',
     classifiers=[
         'Intended Audience :: Financial and Insurance Industry',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
-        'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3',
     ],
-    python_requires='>=3.0',
+    python_requires='>=3.6',
 )

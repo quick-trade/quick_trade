@@ -98,7 +98,7 @@ class PriceChannel(Indicator):
                  resistance_period: int = 20,
                  channel_part: float = 1.0):
         self._support_period = support_period
-        self._resistance_period = support_period
+        self._resistance_period = resistance_period
         self._high = high
         self._low = low
         self._part = channel_part
