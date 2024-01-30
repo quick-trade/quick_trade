@@ -448,6 +448,7 @@ def get_diff(price: float,
 
     elif signal == SELL and low <= take_profit:
         return take_profit - price
+    return 0
 
 
 def make_multi_trade_returns(converted_returns: CONVERTED_TYPE_LIST) -> Tuple[PREDICT_TYPE_LIST, List[int]]:

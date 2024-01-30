@@ -24,11 +24,11 @@ setup(
         'Bug Tracker': 'https://github.com/quick-trade/quick_trade/issues'
     },
     install_requires=[
-        'numpy==1.24.3',
+        'numpy==1.26.1',
         'plotly==5.15.0',
         'pandas==2.0.2',
         'ta==0.10.2',
-        'ccxt==3.1.41',
+        'ccxt==4.1.19',
         'tqdm==4.65.0',
         'scikit-learn',
     ],
