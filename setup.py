@@ -3,7 +3,7 @@ from setuptools import find_packages
 from distutils.core import setup
 
 
-with open('README.md') as file:
+with open('README.md', encoding='utf-8') as file:
     long_desc = file.read()
 
 __version__ = "7.9.8"
