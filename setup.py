@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-from setuptools import find_packages
-from distutils.core import setup
+from setuptools import find_packages, setup
 
 
 with open('README.md', encoding='utf-8') as file:
     long_desc = file.read()
 
-__version__ = "7.9.8"
+__version__ = "8.0.0"
 
 setup(
     name='quick_trade',
